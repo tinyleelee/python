@@ -16,7 +16,7 @@ def getHtml(i): #获取每个专辑地址
         "Accept-Language": "zh-Hans-HK;q=1, zh-Hant-HK;q=0.9, yue-Hant-HK;q=0.8",
         "Accept-Encoding": "gzip, deflate, br",
         "deviceType": "iPhoneX",
-        "deviceId": "23818371731938",
+        "deviceId": "23818371777938",
         "tourist": "0",
         "User-Agent": "Mozilla/5.0",
         "Content-Length": "33",
@@ -49,14 +49,15 @@ def getMp4(html): #获取专辑、视频地址和名称&下载
         except OSError:
             pass
 
-        for i in range(len(lessontitle)):
-            print(lessontitle[i], mp4url[i])
-            f = urllib.request.urlopen(mp4url[i])
-            p = urllib.request.urlopen(pictureurl[i])
+        for j in range(len(lessontitle)):
+            print(lessontitle[j], mp4url[j])
+            f = urllib.request.urlopen(mp4url[j])
+            p = urllib.request.urlopen(pictureurl[j])
             data = f.read()
             data1 = p.read()
-            file_path = r'D:\Download\%s\%s.mp4'%((str(i)+folder_name),lessontitle[i])
-            pic_path = r'D:\Download\%s\%s.png'%((str(i)+folder_name),lessontitle[i])
+            lj = str(lessontitle[j]).replace(u"\\xa0", u"")
+            file_path = r'D:\Download\%s\%s.mp4' % ((str(i) + folder_name), (lj))
+            pic_path = r'D:\Download\%s\%s.png' % ((str(i) + folder_name), (lj))
             with open(file_path, "wb") as code:
                 try:
                     code.write(data)
@@ -67,7 +68,7 @@ def getMp4(html): #获取专辑、视频地址和名称&下载
                     code.write(data1)
                 except OSError:
                     pass
-i = 387
+i = 138
 print('课程id:%s下载中...'% i)
 html = getHtml(i)
 getMp4(html)
